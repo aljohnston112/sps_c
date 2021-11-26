@@ -27,13 +27,13 @@ add_executable(main src/main.cpp)
 target_link_libraries(main sps)
 
 pybind11_add_module(
-    c_sps
+    sps_c
 
     src/probtree.h
     src/node.h
     src/main.cpp
     )
-set_target_properties(c_sps PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(sps_c PROPERTIES LINKER_LANGUAGE CXX)
 
 add_executable(test_sps test/test_sps.cpp)
 target_link_libraries(test_sps Boost::unit_test_framework sps)
