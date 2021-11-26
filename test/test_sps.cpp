@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_CASE(TestBenchmark){
     std::mt19937 rng(rd());
     std::uniform_int_distribution<int> uni(1, 21);
     auto pt = ProbTree<int>();
-    for (int j = 0; j < 1000 ; j++) {
+    for (int j = 0; j < 1 ; j++) {
         auto seq = std::vector<int>();
         rng.seed(j);
         for (int i = 0; i < 336 ; i++) {

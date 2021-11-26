@@ -5,8 +5,6 @@
 #include <unordered_map>
 #include <vector>
 #include <boost/serialization/unordered_map.hpp>
-#include <atomic>
-#include <boost/serialization/split_member.hpp>
 
 
 using namespace std;
@@ -91,23 +89,10 @@ public:
         ar.template register_type<Node<T>>();
         ar & __prob_map__;
         ar & __depth__;
-        boost::serialization::split_member(ar, *this, version);
+        ar & __count__;
     }
 
-    template<class Archive>
-    void save(Archive & ar, const unsigned int version) const{
-        ar << __count__.load();
-
-    }
-
-    template<class Archive>
-    void load(Archive & ar, const unsigned int version){
-        int i;
-        ar >> i;
-        __count__.store(i);
-    }
-
-    std::atomic<int> __count__{0};
+    int __count__{0};
     std::unordered_map<T, Node<T>*> __prob_map__;
     int __depth__ = 0;
 };
