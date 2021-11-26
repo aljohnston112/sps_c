@@ -1,11 +1,3 @@
-/build/
-*.cflags
-*.config
-*.creator
-*.user
-*.cxxflags
-*.files
-*.includes
 CMakeCache.txt
 CMakeFiles
 Makefile
