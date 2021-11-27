@@ -7,7 +7,8 @@
 #include <boost/serialization/vector.hpp>
 #include <thread>
 #include <execution>
-#include <pybind11/pybind11.h>
+#include <map>
+
 
 template <class T>
 void increment_counts(std::vector<Node<T>*>& nodes, std::vector<T>& seq){
@@ -78,7 +79,7 @@ public:
         }
     }
 
-    void predict(std::vector<T>& seq, std::unordered_map<T, double>& probabilities){
+    void predict(std::vector<T>& seq, std::map<T, double>& probabilities){
         auto s = std::vector<T>(seq);
         while(s.size() != 0){
             __root__.predict(s, probabilities);
@@ -105,5 +106,8 @@ public:
     std::vector<Node<T>*> nodes = std::vector<Node<T>*>();
 };
 
+int add(int i, int j) {
+    return i + j;
+}
 
 #endif // PROBTREE_H

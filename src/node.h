@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <map>
 #include <vector>
 #include <boost/serialization/unordered_map.hpp>
 
@@ -55,7 +56,7 @@ public:
         return NULL;
     }
 
-    void predict(std::vector<T>& seq, std::unordered_map<T, double>& probabilities){
+    void predict(std::vector<T>& seq, std::map<T, double>& probabilities){
         auto it = seq.begin();
         Node<T>* node = this;
         Node<T>* actual_node;

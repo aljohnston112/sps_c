@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(TestPrediction){
     seq2.push_back(1);
     seq2.push_back(2);
     seq2.push_back(1);
-    auto pre = std::unordered_map<int, double>();
+    auto pre = std::map<int, double>();
     pt.predict(seq2, pre);
     double roundingError = 0.000000000001;
     BOOST_CHECK(abs((pre[1] - (11.0/13.0))) < roundingError);
@@ -216,7 +216,9 @@ BOOST_AUTO_TEST_CASE(TestBenchmark){
     std::mt19937 rng(rd());
     std::uniform_int_distribution<int> uni(1, 21);
     auto pt = ProbTree<int>();
-    for (int j = 0; j < 7144 ; j++) {
+    for (int j = 0;
+          j < 10; //j < 7144;
+         j++) {
         auto seq = std::vector<int>();
         rng.seed(j);
         for (int i = 0; i < 336 ; i++) {
