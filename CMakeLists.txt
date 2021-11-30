@@ -4,13 +4,17 @@ project(sps LANGUAGES CXX)
 
 find_package(Boost COMPONENTS unit_test_framework serialization REQUIRED)
 find_package (Python COMPONENTS Interpreter Development REQUIRED)
+find_package(PythonLibs REQUIRED)
 add_subdirectory(extern/pybind11)
 
 add_library(
     sps
     INTERFACE
-    src/probtree.h
-    src/node.h
+    src/probtree.hpp
+    src/node.hpp
+    src/rapidcsv.h
+    src/file_util.h
+    src/stock.h
     )
 target_link_libraries(sps INTERFACE Boost::serialization ${PYTHON_LIBRARIES})
 target_include_directories(sps INTERFACE ${PYTHON_INCLUDE_DIRS})
@@ -28,9 +32,9 @@ target_link_libraries(main sps)
 pybind11_add_module(
     sps_c
 
-    src/probtree.h
-    src/node.h
-    src/main.cpp
+    src/probtree.hpp
+    src/node.hpp
+    src/main.cpp  
     )
 set_target_properties(sps_c PROPERTIES LINKER_LANGUAGE CXX)
 target_link_libraries(sps_c INTERFACE sps)

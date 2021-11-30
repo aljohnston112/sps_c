@@ -1,7 +1,7 @@
 #ifndef PROBTREE_H
 #define PROBTREE_H
 
-#include "node.h"
+#include "node.hpp"
 #include "vector_util.h"
 #include <vector>
 #include <boost/serialization/vector.hpp>
@@ -91,7 +91,7 @@ public:
         }
         auto scale = 1.0/sum;
         for(auto e: probabilities){
-            probabilities[e.first] = e.second * scale;
+            probabilities[e.first] = (e.second * scale);
         }
     }
 

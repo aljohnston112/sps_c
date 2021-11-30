@@ -16,6 +16,12 @@ class Node{
 public:
     Node(){}
 
+    ~Node(){
+        for(auto& e: __prob_map__){
+            delete e.second;
+        }
+    }
+
     Node<T>* add(std::vector<T>& seq){
         auto nodes = std::vector<Node<T>*>();
         auto it = seq.begin();
@@ -57,20 +63,23 @@ public:
     }
 
     void predict(std::vector<T>& seq, std::map<T, double>& probabilities){
+        assert(seq.size() != 0);
         auto it = seq.begin();
         Node<T>* node = this;
-        Node<T>* actual_node;
+        Node<T>* actual_node = NULL;
         while(it != seq.end()){
             T s = *it;
-            if(node->__prob_map__.find(s) == node->__prob_map__.end()){
+            auto f = node->__prob_map__.find(s);
+            if(f == node->__prob_map__.end()){
                 return;
             } else {
                 actual_node = node;
-                node = node->__prob_map__[s];
+                node = (*f).second;
                 ++it;
             }
         }
         double sum = 0;
+        assert(actual_node != NULL);
         for(auto& e : actual_node->__prob_map__){
             sum += e.second->__count__;
         }
